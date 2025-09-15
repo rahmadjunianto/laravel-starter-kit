@@ -24,14 +24,16 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        {{fields.headers}}
+                        {{fields}}
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach(${{modelNamePluralLowerCase}} as $item)
                         <tr>
-                            {{fields.rows}}
+                            @foreach($item->getFillable() as $field)
+                                <td>{{ $item->{$field} }}</td>
+                            @endforeach
                             <td>
                                 <div class="btn-group">
                                     <a href="{{ route('{{modelNamePluralLowerCase}}.edit', $item) }}" class="btn btn-warning btn-sm">

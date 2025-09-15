@@ -25,19 +25,17 @@
 
                 <div class="form-group">
                     <label>Permissions</label>
-                    <div class="select2-purple">
-                        <select class="select2" multiple="multiple" data-placeholder="Select permissions" style="width: 100%;" name="permissions[]">
-                            @foreach($permissions as $permission)
-                                <option value="{{ $permission->name }}" {{ $role->hasPermissionTo($permission->name) ? 'selected' : '' }}>
-                                    {{ $permission->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                    <select class="select2" multiple="multiple" name="permissions[]" id="permissions">
+                        @foreach($permissions as $permission)
+                            <option value="{{ $permission->name }}" {{ $role->hasPermissionTo($permission->name) ? 'selected' : '' }}>
+                                {{ ucwords(str_replace('-', ' ', $permission->name)) }}
+                            </option>
+                        @endforeach
+                    </select>
                     @error('permissions')
-                        <span class="invalid-feedback" role="alert">
+                        <div class="text-danger">
                             <strong>{{ $message }}</strong>
-                        </span>
+                        </div>
                     @enderror
                 </div>
 
@@ -49,15 +47,20 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+    <link href="/vendor/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="/vendor/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
 @stop
 
 @section('js')
-    <script src="{{ asset('vendor/select2/js/select2.full.min.js') }}"></script>
+    <script src="/vendor/select2/js/select2.full.min.js"></script>
     <script>
-        $('.select2').select2({
-            theme: 'bootstrap4'
+        $(document).ready(function() {
+            $('#permissions').select2({
+                theme: 'bootstrap4',
+                width: '100%',
+                placeholder: 'Select permissions',
+                allowClear: true
+            });
         });
     </script>
 @stop

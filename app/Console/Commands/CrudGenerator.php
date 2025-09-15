@@ -205,18 +205,11 @@ class CrudGenerator extends Command
 
     protected function getFieldsForIndex($fields)
     {
-        $tableHeaders = '';
-        $tableRows = '';
-
+        $tableFields = '';
         foreach ($fields as $field => $options) {
-            $tableHeaders .= "<th>{$this->formatFieldName($field)}</th>\n";
-            $tableRows .= "<td>{{ \$item->{$field} }}</td>\n";
+            $tableFields .= "<th>{$this->formatFieldName($field)}</th>\n";
         }
-
-        return [
-            'headers' => $tableHeaders,
-            'rows' => $tableRows
-        ];
+        return $tableFields;
     }
 
     protected function getFieldsForForm($fields, $isEdit = false)
