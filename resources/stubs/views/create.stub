@@ -1,0 +1,43 @@
+@extends('adminlte::page')
+
+@section('title', 'Create {{modelName}}')
+
+@section('content_header')
+    <h1>Create New {{modelName}}</h1>
+@stop
+
+@section('content')
+    <div class="card">
+        <div class="card-body">
+            <form action="{{ route('{{modelNamePluralLowerCase}}.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+
+                {{fields}}
+
+                <button type="submit" class="btn btn-primary">Create {{modelName}}</button>
+                <a href="{{ route('{{modelNamePluralLowerCase}}.index') }}" class="btn btn-default">Cancel</a>
+            </form>
+        </div>
+    </div>
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap4-theme@1.0.0/dist/select2-bootstrap4.min.css">
+@stop
+
+@section('js')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                theme: 'bootstrap4',
+            });
+
+            bsCustomFileInput.init();
+        });
+    </script>
+    @stack('scripts')
+@stop

@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Laravel Starter Kit',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -316,27 +316,41 @@ return [
             'text' => 'search',
         ],
         [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
+            'text' => 'Dashboard',
+            'url'  => 'dashboard',
+            'icon' => 'fas fa-fw fa-tachometer-alt',
+        ],
+        ['header' => 'USER MANAGEMENT'],
+        [
+            'text' => 'Users',
+            'url'  => 'users',
+            'icon' => 'fas fa-fw fa-users',
+            'can'  => 'view-users',
         ],
         [
-            'text' => 'pages',
-            'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
+            'text' => 'Roles & Permissions',
+            'icon' => 'fas fa-fw fa-user-shield',
+            'can'  => ['view-roles', 'view-permissions'],
+            'submenu' => [
+                [
+                    'text' => 'Roles',
+                    'url'  => 'roles',
+                    'icon' => 'fas fa-fw fa-user-tag',
+                    'can'  => 'view-roles',
+                ],
+                [
+                    'text' => 'Permissions',
+                    'url'  => 'permissions',
+                    'icon' => 'fas fa-fw fa-key',
+                    'can'  => 'view-permissions',
+                ],
+            ],
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'ACCOUNT SETTINGS'],
         [
-            'text' => 'profile',
-            'url' => 'admin/settings',
+            'text' => 'Profile',
+            'url'  => 'profile',
             'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
         ],
         [
             'text' => 'multilevel',

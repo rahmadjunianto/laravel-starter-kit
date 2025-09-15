@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\{{modelName}};
+use Illuminate\Http\Request;
+use App\Helpers\FlashHelper;
+
+class {{modelName}}Controller extends Controller
+{
+    public function index()
+    {
+        ${{modelNamePluralLowerCase}} = {{modelName}}::latest()->paginate(10);
+        return view('{{modelNamePluralLowerCase}}.index', compact('{{modelNamePluralLowerCase}}'));
+    }
+
+    public function create()
+    {
+        return view('{{modelNamePluralLowerCase}}.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            {{validationRules}}
+        ]);
+
+        {{modelName}}::create($validated);
+
+        FlashHelper::success('{{modelName}} created successfully.');
+        return redirect()->route('{{modelNamePluralLowerCase}}.index');
+    }
+
+    public function edit({{modelName}} ${{modelNameSingularLowerCase}})
+    {
+        return view('{{modelNamePluralLowerCase}}.edit', compact('{{modelNameSingularLowerCase}}'));
+    }
+
+    public function update(Request $request, {{modelName}} ${{modelNameSingularLowerCase}})
+    {
+        $validated = $request->validate([
+            {{validationRules}}
+        ]);
+
+        ${{modelNameSingularLowerCase}}->update($validated);
+
+        FlashHelper::success('{{modelName}} updated successfully.');
+        return redirect()->route('{{modelNamePluralLowerCase}}.index');
+    }
+
+    public function destroy({{modelName}} ${{modelNameSingularLowerCase}})
+    {
+        ${{modelNameSingularLowerCase}}->delete();
+
+        FlashHelper::success('{{modelName}} deleted successfully.');
+        return redirect()->route('{{modelNamePluralLowerCase}}.index');
+    }
+}
